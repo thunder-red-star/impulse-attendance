@@ -29,31 +29,44 @@ const newUserForm = document.getElementById('new-user-form');
 
 swipeForm.addEventListener('submit', (e) => {
 	e.preventDefault();
-	const name = document.getElementById('name').value;
-	const id = document.getElementById('id').value;
+	const name = document.getElementById('name');
+	const id = document.getElementById('id')
 	socket.emit('attendance', {
-		name: name,
-		id: id
+		name: name.value,
+		id: id.value
 	});
+	name.value = '';
+	id.value = '';
 });
 
 newUserForm.addEventListener('submit', (e) => {
 	e.preventDefault();
-	const name = document.getElementById('new_name').value;
-	const osis = document.getElementById('new_osis').value;
-	const long_id = document.getElementById('new_long_id').value;
+	const name = document.getElementById('new_name');
+	const osis = document.getElementById('new_osis');
+	const long_id = document.getElementById('new_long_id');
 	socket.emit('register', {
-		name: name,
-		osis: osis,
-		long_id: long_id
+		name: name.value,
+		osis: osis.value,
+		long_id: long_id.value
 	});
+	name.value = '';
+	osis.value = '';
+	long_id.value = '';
 });
 
 // When the server responds to attendance and register hooks, display a Noty notification
 socket.on('attendance', (data) => {
-	createNoty('success', data.message);
+	if (data.success) {
+		createNoty('success', data.message);
+	} else {
+		createNoty('error', data.message);
+	}
 });
 
 socket.on('register', (data) => {
-	createNoty('success', data.message);
+	if (data.success) {
+		createNoty('success', data.message);
+	} else {
+		createNoty('error', data.message);
+	}
 });
