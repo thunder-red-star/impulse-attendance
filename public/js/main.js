@@ -58,6 +58,7 @@ newUserForm.addEventListener('submit', (e) => {
 socket.on('attendance', (data) => {
 	if (data.success) {
 		createNoty('success', data.message);
+		appendLog(data.message);
 	} else {
 		createNoty('error', data.message);
 	}
@@ -66,6 +67,7 @@ socket.on('attendance', (data) => {
 socket.on('register', (data) => {
 	if (data.success) {
 		createNoty('success', data.message);
+		appendLog(data.message);
 	} else {
 		createNoty('error', data.message);
 	}

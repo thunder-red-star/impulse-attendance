@@ -55,10 +55,10 @@ fastify.get('/dump/all', async (request, reply) => {
     const attendanceData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/attendance.json'), 'utf8'));
 
     // We will create a CSV out of the attendance data
-    let csv = 'Name,Days Attended\n';
+    let csv = 'Name\tDays Attended\n';
     for (let x = 0; x < Object.keys(attendanceData).length; x++) {
         let userAttendanceData = attendanceData[Object.keys(attendanceData)[x]];
-        csv += Object.keys(attendanceData)[x] + ',' + userAttendanceData + '\n';
+        csv += Object.keys(attendanceData)[x] + '\t' + userAttendanceData.join(",") + '\n';
     }
     return reply.send(csv);
 });
@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
         if (!data.name && !data.id) {
             socket.emit('attendance', {
                 success: false,
-                message: 'Please enter a name and ID'
+                message: 'Please enter a name or ID'
             });
             return;
         }
@@ -87,10 +87,20 @@ io.on('connection', (socket) => {
         let user = userData.find(user => {
             if (data.id.length === 9) {
                 return user.osis === data.id
-            } else {
+            } else if (data.id.length === 13) {
                 return user.long_id === data.id
+            } else {
+                return false;
             }
         });
+
+
+        // If no osis was provided, find the user by their name
+        if (!user && data.name) {
+            user = userData.find(user => {
+                return user.name === data.name
+            });
+        }
 
         // If no user was found, return an error
         if (!user) {
@@ -104,23 +114,24 @@ io.on('connection', (socket) => {
         // Find the user's attendance record
         let userAttendanceRecord = attendanceData[user.name];
 
+
         // If no attendance record exists, create one
         if (!userAttendanceRecord) {
-            attendanceData[user.name] = [];
+            attendanceData[user.name] = [new Date().toLocaleDateString()];
+            userAttendanceRecord = attendanceData[user.name];
+        } else {
+            // Check if the last entry is the same as today's date
+            if (userAttendanceRecord[userAttendanceRecord.length - 1] === new Date().toLocaleDateString()) {
+                socket.emit('attendance', {
+                    success: false,
+                    message: 'You have already been marked as present today'
+                });
+                return;
+            }
+
+            // Add today's date to the attendance record
+            attendanceData[user.name].push(new Date().toLocaleDateString());
         }
-
-        // Check if the last entry is the same as today's date
-        if (userAttendanceRecord[userAttendanceRecord.length - 1] === new Date().toLocaleDateString()) {
-            socket.emit('attendance', {
-                success: false,
-                message: 'You have already been marked as present today'
-            });
-            return;
-        }
-
-        // Add today's date to the attendance record
-        attendanceData[user.name].push(new Date().toLocaleDateString());
-
         // Write the attendance data back to the file
         fs.writeFileSync(path.join(__dirname, 'data/attendance.json'), JSON.stringify(attendanceData));
 
