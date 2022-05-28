@@ -121,7 +121,7 @@ io.on('connection', (socket) => {
         if (!user) {
             socket.emit('attendance', {
                 success: false,
-                message: 'No user found with that id'
+                message: 'No user found with that id or name, please check case sensitivity!'
             });
             return;
         }
