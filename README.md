@@ -18,3 +18,26 @@
 * `npm i`
 * `npm run dev` or `npm run prod`
 * profit
+
+## future
+* react-native
+* react-native-web
+* react-native-webview
+* react-native-webview-html
+* react-native-webview-html-jsx
+* react-native-webview-html-jsx-css
+* react-native-webview-html-jsx-css-jsx
+* react-native-webview-html-jsx-css-jsx-jsx
+* react-native-webview-html-jsx-css-jsx-jsx-jsx
+* react-native-webview-html-jsx-css-jsx-jsx-jsx-jsx
+* react-native-webview-html-jsx-css-jsx-jsx-jsx-jsx-jsx
+* react-native-webview-html-jsx-css-jsx-jsx-jsx-jsx-jsx-jsx
+* react-native-webview-html-jsx-css-jsx-jsx-jsx-jsx-jsx-jsx-jsx
+* react-native-webview-html-jsx-css-jsx-jsx-jsx-jsx-jsx-jsx-jsx-jsx
+* react-native-webview-html-jsx-css-jsx-jsx-jsx-jsx-jsx-jsx-jsx-jsx-jsx
+
+## endpoints
+* `/` = actual app
+* `/test/` = test page, check if websockets are working
+* `/dump/today` = dump today's attendance (in csv)
+* `/dump/all` = dump all attendance (in csv)

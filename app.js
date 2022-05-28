@@ -129,7 +129,6 @@ io.on('connection', (socket) => {
         // Find the user's attendance record
         let userAttendanceRecord = attendanceData[user.name];
 
-
         // If no attendance record exists, create one
         if (!userAttendanceRecord) {
             attendanceData[user.name] = [new Date().toLocaleDateString()];
