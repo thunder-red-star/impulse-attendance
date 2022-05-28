@@ -25,12 +25,6 @@ function isAValidId(id) {
 // Socket.io
 const io = require('socket.io')(fastify.server);
 
-fastify.register(AutoLoad, {
-    dir: path.join(__dirname, 'plugins'),
-    options: Object.assign({}, {
-        prefix: 'plugins/'
-    })
-});
 
 fastify.register(require('@fastify/static'), {
     root: path.join(__dirname, 'public'),
@@ -227,14 +221,4 @@ io.on('connection', (socket) => {
 });
 
 // Run the server!
-const start = async () => {
-    try {
-        await fastify.listen(3000, '');
-        fastify.log.info(`server listening on ${fastify.server.address().port}`);
-    } catch (err) {
-        fastify.log.error(err);
-        process.exit(1);
-    }
-}
-
-start();
+fastify.listen(3000, '0.0.0.0');

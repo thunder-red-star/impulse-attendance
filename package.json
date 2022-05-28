@@ -10,7 +10,8 @@
     "test": "tap \"test/**/*.test.js\"",
     "start": "node app.js",
     "dev": "nodemon --watch app.js --exec \"npm start\"",
-    "prod": "node app.js"
+    "prod": "node app.js",
+    "init": "node init.js"
   },
   "repository": {
     "type": "git",
