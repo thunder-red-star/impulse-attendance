@@ -25,7 +25,6 @@ function isAValidId(id) {
 // Socket.io
 const io = require('socket.io')(fastify.server);
 
-
 fastify.register(require('@fastify/static'), {
     root: path.join(__dirname, 'public'),
     prefix: '/public/'
@@ -220,4 +219,4 @@ io.on('connection', (socket) => {
 });
 
 // Run the server!
-fastify.listen(3000, '0.0.0.0');
+fastify.listen(3002, '0.0.0.0');
