@@ -1,0 +1,22 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h1>Le home page</h1>
+        <h2>The page d’accueil</h2>
+        <p id="websocket-debug">
+            Trying to connect to websocket...
+        </p>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+            socket.on('connect', function() {
+                document.getElementById('websocket-debug').innerHTML = 'Connected to websocket';
+            });
+			socket.on('message', function(msg) {
+				document.getElementById('websocket-debug').innerHTML = msg.time;
+            });
+        </script>
+    </body>
+</html>
