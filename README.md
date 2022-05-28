@@ -2,7 +2,7 @@
 
 ## founding principles
 * **before we can create an object oriented program, we have to create a working oriented program**
-* react is going closed source so no
+* [react is going closed source so no](https://sebastiancarlos.medium.com/meta-close-sources-react-we-can-no-longer-give-this-valuable-technology-for-free-1024575f20e8)
 * other frameworks are way too complex for this, why?
 * websockets ez
 * WE DON'T NEED TO GO ALL OUT WITH THE DATABASES ANTHONY
