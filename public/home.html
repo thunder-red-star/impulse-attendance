@@ -13,13 +13,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="/public/css/main.css">
+
 </head>
 <body>
-    <h1>ATTDZR</h1>
+    <p id="title">Impulse Attendance</p>
     <!-- A grid of three containers, one on the left, one in the middle, and one on the right, each with equal width -->
-    <div class="container-fluid">
+    <div class="container-fluid col-sm-10 col-md-10 col-lg-10">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-4 full-height">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Swipe or enter name</h5>
@@ -27,7 +28,7 @@
                             <div class="row">
                                 <form id="swipe-form">
                                     <input type="text" id="id" class="form-control" placeholder="ID">
-                                    <p>or</p>
+                                    or
                                     <input type="text" id="name" class="form-control" placeholder="Name">
                                     <button class="btn btn-primary">Submit</button>
                                 </form>
@@ -36,16 +37,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 full-height">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">New User</h5>
                         <p class="card-text">
                             <div class="row">
                                 <form id="new-user-form">
-                                    <input type="text" id="new_name" class="form-control" placeholder="Name">
-                                    <input type="text" id="new_osis" class="form-control" placeholder="OSIS">
-                                    <input type="text" id="new_long_id" class="form-control" placeholder="Card ID">
+                                    <input type="text" id="new_name" class="form-control" placeholder="Name" required>
+                                    <input type="text" id="new_osis" class="form-control" placeholder="OSIS" required>
+                                    <input type="text" id="new_long_id" class="form-control" placeholder="Card ID" required>
                                     <button class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
@@ -53,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 full-height">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Log</h5>

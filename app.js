@@ -8,6 +8,20 @@ const fastify = require('fastify')({
     logger: true
 });
 
+// Utils
+
+function isAValidId(id) {
+    let valid = true;
+    // Check if each character is a number
+    for (let i = 0; i < id.length; i++) {
+        if (isNaN(id[i])) {
+            valid = false;
+        }
+    }
+    return valid;
+}
+
+
 // Socket.io
 const io = require('socket.io')(fastify.server);
 
@@ -83,6 +97,13 @@ io.on('connection', (socket) => {
         // Load attendance and user data
         const userData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/users.json')));
         const attendanceData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/attendance.json')));
+        // Validate data
+        if (!isAValidId(data.id)) {
+            return socket.emit('attendance', {
+                success: false,
+                message: 'Provided ID is not valid'
+            });
+        }
         // Find the user by their id. If the id is 9 digits long, it's an osis, otherwise it's a long id
         let user = userData.find(user => {
             if (data.id.length === 9) {
@@ -153,10 +174,24 @@ io.on('connection', (socket) => {
             });
             return;
         }
+        if (!isAValidId(data.osis)) {
+            socket.emit('register', {
+                success: false,
+                message: 'Provided OSIS contains invalid characters'
+            });
+            return;
+        }
         if (data.long_id.length !== 13) {
             socket.emit('register', {
                 success: false,
                 message: 'Provided long ID is not 13 digits long'
+            });
+            return;
+        }
+        if (!isAValidId(data.long_id)) {
+            socket.emit('register', {
+                success: false,
+                message: 'Provided long ID contains invalid characters'
             });
             return;
         }

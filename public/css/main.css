@@ -1,3 +1,22 @@
 #log_list { list-style-type: none; margin: 0; padding: 0; }
 #log_list > li { padding: 0.5rem 1rem; }
 #log_list > li:nth-child(odd) { background: #efefef; }
+
+#title {
+    font-size: 250%;
+    font-weight: bold;
+    text-align: center;
+    margin: 25px 0;
+    padding: 0;
+}
+.full-height {
+    height: 100%;
+}
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #ccc;
+}
