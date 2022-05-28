@@ -1,7 +1,7 @@
 # impulse attendance
 
 ## founding principles
-* **before we create an object oriented program, we create a working oriented program**
+* **before we can create an object oriented program, we have to create a working oriented program**
 * react is going closed source so no
 * other frameworks are way too complex for this, why?
 * websockets ez
