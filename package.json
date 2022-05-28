@@ -9,7 +9,8 @@
   "scripts": {
     "test": "tap \"test/**/*.test.js\"",
     "start": "node app.js",
-    "dev": "nodemon --watch app.js --exec \"npm start\""
+    "dev": "nodemon --watch app.js --exec \"npm start\"",
+    "prod": "node app.js"
   },
   "repository": {
     "type": "git",
